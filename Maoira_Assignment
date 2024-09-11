@@ -1,0 +1,19 @@
+1. Extract Data
+To begin, you need to read data from the provided CSV files (order_origin_A.csv and order_origin_B.csv).
+
+Write a PySpark function to read data from the provided files.
+python
+Copy code
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, expr, concat, lit
+
+def read_data(file_path):
+    spark = SparkSession.builder \
+        .appName("Sales Data Processing") \
+        .getOrCreate()
+    
+    return spark.read.csv(file_path, header=True, inferSchema=True)
+
+# Load data from both regions
+df_A = read_data('order_origin_A.csv')
+df_B = read_data('order_origin_B.csv')
